@@ -45,3 +45,22 @@ body {
   gap: 24px;
   margin: 24px;
 }
+.login-container{
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+ 
+}
+.card-content{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.signin{
+  margin: 0px;
+}
+.signin:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}

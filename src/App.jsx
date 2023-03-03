@@ -1,37 +1,29 @@
-import { useState, useEffect } from "react";
 import "./App.css";
-import { API } from "../global.js";
+import { Routes, Route } from "react-router-dom";
+import { PhoneList } from "./PhoneList";
+import { LoginPage } from "./LoginPage";
+import { useNavigate } from "react-router-dom";
+import { SignUpPage } from "./SignUpPage";
 
 function App() {
+  const navigate = useNavigate();
   return (
     <div className="App">
-      <PhoneList />
+      <nav>
+        <button onClick={() => navigate("/login")}>login</button>
+      </nav>
+      <Routes>
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/mobiles" element={<PhoneList />} />
+      </Routes>
     </div>
   );
 }
 
-const PhoneList = () => {
-  const [mobile, setMobile] = useState([]);
-  useEffect(() => {
-    fetch(`${API}/mobiles`)
-      .then((response) => response.json())
-      .then((data) => setMobile(data));
-  }, []);
-  return (
-    <div className="phone-list-container">
-      {mobile.map((data) => (
-        <Phone key={data.img} data={data} />
-      ))}
-    </div>
-  );
+const Home = () => {
+  return <div>welcome to Mobile App</div>;
 };
-const Phone = ({ data }) => {
-  return (
-    <div className="phone-container">
-      <img className="phone-picture" src={data.img} />
-      <h1 className="phone-name">{data.model}</h1>
-      <h3 className="phone-company">{data.company}</h3>
-    </div>
-  );
-};
+
 export default App;
