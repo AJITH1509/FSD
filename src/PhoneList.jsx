@@ -11,7 +11,7 @@ export const PhoneList = () => {
   return (
     <div className="phone-list-container">
       {mobile.map((data) => (
-        <Phone key={data.img} data={data} />
+        <Phone key={data._id} data={data} />
       ))}
     </div>
   );
