@@ -3,8 +3,11 @@ import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { API } from "../global";
 
 export const LoginPage = () => {
+  const navigate = useNavigate();
   const { handleSubmit, handleChange, values } = useFormik({
     initialValues: {
       username: "",
@@ -15,7 +18,10 @@ export const LoginPage = () => {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(values),
-      });
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+      navigate("/mobiles");
     },
   });
   return (
