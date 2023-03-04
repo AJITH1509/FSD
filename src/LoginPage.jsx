@@ -13,15 +13,20 @@ export const LoginPage = () => {
       username: "",
       password: "",
     },
-    onSubmit: (values) => {
-      fetch(`${API}/login`, {
+    onSubmit: async (values) => {
+      const data = await fetch(`${API}/login`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(values),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
-      navigate("/mobiles");
+      });
+
+      if (data.status === 401) {
+        console.log("error");
+      } else {
+        const result = await data.json();
+        localStorage.setItem("token", result.token);
+        navigate("/mobiles");
+      }
     },
   });
   return (
