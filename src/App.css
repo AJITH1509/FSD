@@ -3,22 +3,22 @@
 }
 
 .phone-picture {
-  height: 540px;
-  width: 750px;
-  object-fit: contain;
+  width: 100%;
+height: 400px;
+object-fit: contain;
 }
 
 .phone-container {
   background-color: white;
-  width: 750px;
+  width: 340px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: rgb(0 0 0 / 24%) 1px 2px 13px;
 }
 
 .phone-name {
-  padding: 16px;
-  font-size: 48px;
+  padding: 8px;
+  font-size: 24px;
   margin-bottom: 0px;
 
   /* font-weight: bold; */
@@ -26,7 +26,7 @@
 
 .phone-company {
   /* padding: 16px; */
-  font-size: 32px;
+  font-size: 16px;
   color: grey;
   /* font-weight: bold; */
   margin-top: 0px;
@@ -39,11 +39,9 @@ body {
 }
 
 .phone-list-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 24px;
-  margin: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  justify-items: center;
 }
 .login-container{
   margin: 10px auto;
