@@ -33,7 +33,7 @@ object-fit: contain;
 }
 
 body {
-  background-color: whitesmoke;
+  background-image: linear-gradient(to right, #36469fb8, #26d0ce);
   font-family: Roboto;
   margin: 16px;
 }
@@ -42,9 +42,10 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   justify-items: center;
+  gap: 10px;
 }
 .login-container{
-  margin: 10px auto;
+  margin: 100px auto;
   display: flex;
   flex-direction: column;
   max-width: 400px;

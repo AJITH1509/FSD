@@ -4,62 +4,48 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
-import { API } from "../global";
 import * as yup from "yup";
+import { API } from "../global.js";
 
 const formValidationSchema = yup.object({
-  name: yup.string().required("required").min(5),
   email: yup.string().email().required("Email address is required"),
-  password: yup.string().required("password required").min(8),
+  password: yup.string().required("New password required").min(8),
 });
 
-export const SignUpPage = () => {
+export const NewPassword = () => {
   const navigate = useNavigate();
   const { handleSubmit, handleChange, handleBlur, values, touched, errors } =
     useFormik({
       initialValues: {
-        name: "",
         email: "",
         password: "",
       },
       validationSchema: formValidationSchema,
-      onSubmit: (values) => {
-        fetch(`${API}/signup`, {
+      onSubmit: async (values) => {
+        const data = await fetch(`${API}/setpassword`, {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(values),
-        })
-          .then((response) => response.json())
-          .then((data) => console.log(data));
-        navigate("/login");
+        });
+
+        if (data.status === 401) {
+          console.log("error");
+        } else {
+          navigate("/login");
+        }
       },
     });
-
-  const reDirect = () => {
-    navigate("/login");
-  };
-
   return (
     <form onSubmit={handleSubmit}>
       <Card className="login-container">
-        <h2>Sign up</h2>
+        <h4>Reset your Password</h4>
         <CardContent className="card-content">
-          <TextField
-            name="name"
-            value={values.name}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            label="Name"
-            variant="outlined"
-            error={touched.name && errors.name}
-            helperText={touched.name && errors.name ? errors.name : null}
-          />
           <TextField
             name="email"
             value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
-            label="email"
+            label="Email"
             variant="outlined"
             error={touched.email && errors.email}
             helperText={touched.email && errors.email ? errors.email : null}
@@ -69,20 +55,16 @@ export const SignUpPage = () => {
             value={values.password}
             onChange={handleChange}
             onBlur={handleBlur}
-            label="password"
+            label="Enter New password"
             variant="outlined"
             error={touched.password && errors.password}
             helperText={
               touched.password && errors.password ? errors.password : null
             }
           />
-          <Button type="submit" color="success" variant="contained">
-            Register
+          <Button color="secondary" type="submit" variant="contained">
+            Confirm
           </Button>
-          <small style={{ opacity: 0.5 }}>already registered ?</small>
-          <h5 className="signin" onClick={() => reDirect()}>
-            sign in
-          </h5>
         </CardContent>
       </Card>
     </form>

@@ -4,52 +4,84 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
 import { API } from "../global";
+
+const formValidationSchema = yup.object({
+  email: yup.string().email().required("Email address is required"),
+  password: yup.string().required("password required").min(8),
+});
 
 export const LoginPage = () => {
   const navigate = useNavigate();
-  const { handleSubmit, handleChange, values } = useFormik({
-    initialValues: {
-      username: "",
-      password: "",
-    },
-    onSubmit: async (values) => {
-      const data = await fetch(`${API}/login`, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(values),
-      });
+  const { handleSubmit, handleChange, handleBlur, values, touched, errors } =
+    useFormik({
+      initialValues: {
+        email: "",
+        password: "",
+      },
+      validationSchema: formValidationSchema,
+      onSubmit: async (values) => {
+        const data = await fetch(`${API}/login`, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(values),
+        });
 
-      if (data.status === 401) {
-        console.log("error");
-      } else {
-        const result = await data.json();
-        localStorage.setItem("token", result.token);
-        navigate("/mobiles");
-      }
-    },
-  });
+        if (data.status === 401) {
+          alert("invalid Credantials");
+        } else {
+          const result = await data.json();
+          localStorage.setItem("token", result.token);
+          navigate("/mobiles");
+        }
+      },
+    });
   return (
     <form onSubmit={handleSubmit}>
       <Card className="login-container">
-        <h4>Login</h4>
+        <h4>Welcome !!</h4>
         <CardContent className="card-content">
           <TextField
-            name="username"
-            value={values.username}
+            name="email"
+            value={values.email}
             onChange={handleChange}
-            label="username"
-            variant="standard"
+            onBlur={handleBlur}
+            label="Email"
+            variant="outlined"
+            error={touched.email && errors.email}
+            helperText={touched.email && errors.email ? errors.email : null}
           />
           <TextField
             name="password"
             value={values.password}
             onChange={handleChange}
+            onBlur={handleBlur}
             label="password"
-            variant="standard"
+            variant="outlined"
+            error={touched.password && errors.password}
+            helperText={
+              touched.password && errors.password ? errors.password : null
+            }
           />
           <Button type="submit" variant="contained">
             Login
+          </Button>
+          <small
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate("/login/forgetpassword")}
+          >
+            forget password?
+            <hr style={{ opacity: 0.5, width: "70%" }} />
+          </small>
+
+          <Button
+            style={{ width: "50%", margin: "0px auto" }}
+            onClick={() => navigate("/signup")}
+            variant="contained"
+            color="success"
+          >
+            Create an Account
           </Button>
         </CardContent>
       </Card>
