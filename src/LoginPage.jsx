@@ -81,7 +81,7 @@ export const LoginPage = () => {
             variant="contained"
             color="success"
           >
-            Create an Account
+            Create Account
           </Button>
         </CardContent>
       </Card>

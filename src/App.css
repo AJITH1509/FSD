@@ -17,19 +17,16 @@ object-fit: contain;
 }
 
 .phone-name {
-  padding: 8px;
   font-size: 24px;
-  margin-bottom: 0px;
+  margin: 0px auto;
 
-  /* font-weight: bold; */
+
 }
 
 .phone-company {
-  /* padding: 16px; */
   font-size: 16px;
   color: grey;
-  /* font-weight: bold; */
-  margin-top: 0px;
+  margin-top: 5px;
 }
 
 body {

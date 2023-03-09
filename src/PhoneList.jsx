@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { API } from "../global.js";
+import Button from "@mui/material/Button";
 
 function checkFunction(response) {
   if (response.status === 401) {
@@ -27,10 +28,13 @@ export const PhoneList = () => {
       .catch((err) => logout());
   }, []);
   return (
-    <div className="phone-list-container">
-      {mobile.map((data) => (
-        <Phone key={data._id} data={data} />
-      ))}
+    <div>
+      <h2>Welcome to Mobile Bazzar</h2>
+      <div className="phone-list-container">
+        {mobile.map((data) => (
+          <Phone key={data._id} data={data} />
+        ))}
+      </div>
     </div>
   );
 };
@@ -40,6 +44,8 @@ const Phone = ({ data }) => {
       <img className="phone-picture" src={data.img} />
       <h1 className="phone-name">{data.model}</h1>
       <h3 className="phone-company">{data.company}</h3>
+      <Button variant="contained">Buy Now</Button>
+      <hr style={{ opacity: 0.5, width: "70%" }} />
     </div>
   );
 };
