@@ -58,6 +58,7 @@ export const LoginPage = () => {
             onChange={handleChange}
             onBlur={handleBlur}
             label="password"
+            type="password"
             variant="outlined"
             error={touched.password && errors.password}
             helperText={

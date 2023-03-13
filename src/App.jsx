@@ -7,6 +7,7 @@ import { SignUpPage } from "./SignUpPage";
 import { ForgetPass } from "./Forget";
 import { VerifyOtp } from "./VerifyOtp";
 import { NewPassword } from "./newPassword";
+import { EmailVerification } from "./EmailVerification";
 
 function App() {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/login/forgetpassword" element={<ForgetPass />} />
         <Route path="/verifyotp" element={<VerifyOtp />} />
+        <Route path="/mailverification" element={<EmailVerification />} />
         <Route path="/setpassword" element={<NewPassword />} />
         <Route path="/" element={<LoginPage />} />
         <Route path="/mobiles" element={<PhoneList />} />

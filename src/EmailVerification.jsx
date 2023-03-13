@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { API } from "../global.js";
 
-export const VerifyOtp = () => {
+export const EmailVerification = () => {
   const navigate = useNavigate();
   const { handleSubmit, handleChange, values } = useFormik({
     initialValues: {
@@ -29,7 +29,7 @@ export const VerifyOtp = () => {
   return (
     <form onSubmit={handleSubmit}>
       <Card className="login-container">
-        <h4>OTP verification</h4>
+        <h4>Mail verification</h4>
         <p>Enter the OTP, that we sent to your registerd Email</p>
         <CardContent className="card-content">
           <TextField

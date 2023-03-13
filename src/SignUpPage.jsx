@@ -8,7 +8,7 @@ import { API } from "../global";
 import * as yup from "yup";
 
 const formValidationSchema = yup.object({
-  name: yup.string().required("required").min(5),
+  name: yup.string().required("required"),
   email: yup.string().email().required("Email address is required"),
   password: yup.string().required("password required").min(8),
 });
@@ -71,6 +71,7 @@ export const SignUpPage = () => {
             onBlur={handleBlur}
             label="password"
             variant="outlined"
+            type="password"
             error={touched.password && errors.password}
             helperText={
               touched.password && errors.password ? errors.password : null
